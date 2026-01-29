@@ -33,3 +33,23 @@ class Expense {
 }
 
 enum Category { food, travel, leisure, work }
+
+class ExpenseBucket {
+  const ExpenseBucket(this.category, this.expenses);
+
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+    : expenses = allExpenses
+          .where((element) => element.category == category)
+          .toList();
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses {
+    double sum = 0;
+    for (final e in expenses) {
+      sum += e.amount;
+    }
+    return sum;
+  }
+}
